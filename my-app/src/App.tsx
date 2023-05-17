@@ -1,8 +1,22 @@
-import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import Button from '@trimbleinc/modus-react-bootstrap/esm/Button';
+import { useState } from 'react';
+import Toast from '@trimbleinc/modus-react-bootstrap/esm/Toast'
 
 function App() {
+  const [showBadge, setShowBadge] = useState(false);
+
+  function appToast() {
+    if (showBadge) {
+      return (
+        <Toast className='toast-success' delay={5000}>Toasty
+          <Button color="secondary" onClick={() => setShowBadge(false)}>hide</Button>
+        </Toast>
+      );
+    }
+    return null
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -10,14 +24,8 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Button size="lg" onClick={() => setShowBadge(true)}>This is a Modus button</Button>
+        {appToast()}
       </header>
     </div>
   );
